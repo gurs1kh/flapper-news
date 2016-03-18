@@ -5,7 +5,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
 		$stateProvider
 			.state('home', {
 				url: '/home',
-				templateUrl: '/home.html',
+				templateUrl: '/views/home.html',
 				controller: 'MainCtrl',
 				resolve: {
 					postPromise: ['posts', function(posts) {
@@ -15,7 +15,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
 			})
 			.state('posts', {
 				url: '/posts/{id}',
-				templateUrl: '/posts.html',
+				templateUrl: '/views/post.html',
 				controller: 'PostsCtrl',
 				resolve: {
 					post: ['$stateParams', 'posts', function($stateParams,posts) {
@@ -25,7 +25,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
 			})
 			.state('login', {
 				url: '/login',
-				templateUrl: '/login.html',
+				templateUrl: '/views/login.html',
 				controller: 'AuthCtrl',
 				onEnter: ['$state', 'auth', function($state, auth){
 					if(auth.isLoggedIn()){
@@ -35,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
 			})
 			.state('register', {
 				url: '/register',
-				templateUrl: '/register.html',
+				templateUrl: '/views/register.html',
 				controller: 'AuthCtrl',
 				onEnter: ['$state', 'auth', function($state, auth){
 					if(auth.isLoggedIn()){
@@ -47,7 +47,6 @@ app.config(['$stateProvider', '$urlRouterProvider',
 	}
 ])
 
-	// Main controller
 app.controller('MainCtrl', ['$scope', 'posts', 'auth',
 	function($scope, posts, auth){
 		$scope.isLoggedIn = auth.isLoggedIn;
@@ -70,9 +69,8 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
 			posts.upvote(post);
 		};
 	}
-])
+]);
 
-	// Post controller
 app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
 	function($scope, posts, post, auth) {
 		$scope.isLoggedIn = auth.isLoggedIn;
@@ -96,48 +94,46 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
 	}
 ])
 
-// Angular service
 app.factory('posts', ['$http', 'auth',
 	function($http, auth){
-		// service body
 		var o = {
 			posts: []
 		};
-		// get all posts
+
 		o.getAll = function() {
 			return $http.get('/posts').success(function(data) {
 				angular.copy(data, o.posts);
 			});
 		};
-		// create new posts
+
 		o.create = function(post) {
 			return $http.post('/posts', post).success(function(data) {
 				o.posts.push(data);
 			});
 		};
-		// upvote
+
 		o.upvote = function(post) {
 			return $http.put('/posts/' + post._id + '/upvote').success(function(data) {
 				post.upvotes += 1;
 			});
 		};
-		// get single post
+
 		o.get = function(id) {
 			return $http.get('/posts/' + id).then(function(res) {
 				return res.data;
 			});
 		};
-		// delete single post
+
 		o.delete = function(post) {
 			return $http.delete('/posts/' + post._id).success(function(data) {
 				angular.copy(data, o.posts);
 			});
 		}
-		// add comment
+
 		o.addComment = function(id, comment) {
 			return $http.post('/posts/' + id + '/comments', comment);
 		};
-		// upvote comment
+
 		o.upvoteComment = function(post, comment) {
 			return $http.put('/posts/' + post._id + '/comments/' + comment._id + '/upvote')
 				.success(function(data) {
