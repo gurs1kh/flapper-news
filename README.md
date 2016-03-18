@@ -4,6 +4,6 @@ Implementation of the app from the tutorial at https://thinkster.io/angulartutor
 
 I didn't like the way that the author set up the folder structure, so I fixed it up.
 
-to run: `npm install && node start`
+to run: `npm install && node server`
 
 You can then view it at localhost:3000
