@@ -24,28 +24,6 @@ var getErrorMessage = function(err) {
 	return message;
 };
 
-exports.renderLogin = function(req, res, next) {
-	if (!req.user) {
-		res.render('login', {
-			title: 'Log-in Form',
-			messages: req.flash('error') || req.flash('info')
-		});
-	} else {
-		return res.redirect('/');
-	}
-};
-
-exports.renderRegister = function(req, res, next) {
-	if (!req.user) {
-		res.render('register', {
-			title: 'Register Form',
-			messages: req.flash('error')
-		});
-	} else {
-		return res.redirect('/');
-	}
-};
-
 exports.register = function(req, res, next){
 	if(!req.body.username || !req.body.password){
 		return res.status(400).json({message: 'Please fill out all fields'});
