@@ -1,4 +1,4 @@
-angular.module("posts").factory('PostsService', ['$http', 'AuthService',
+angular.module('posts').factory('PostsService', ['$http', 'AuthService',
 	function($http, auth){
 		var factory = {
 			posts: []

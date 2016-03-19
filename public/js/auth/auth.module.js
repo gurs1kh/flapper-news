@@ -1,1 +1,1 @@
-angular.module("auth", []);
+angular.module('auth', []);

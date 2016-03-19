@@ -1,1 +1,1 @@
-angular.module("main", ["auth", "posts"]);
+angular.module('main', ['auth', 'posts']);

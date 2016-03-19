@@ -1,4 +1,4 @@
-angular.module("main").controller('MainCtrl', ['$scope', 'PostsService', 'AuthService',
+angular.module('main').controller('MainCtrl', ['$scope', 'PostsService', 'AuthService',
 	function($scope, posts, auth){
 		$scope.isLoggedIn = auth.isLoggedIn;
 		$scope.posts = posts.posts;

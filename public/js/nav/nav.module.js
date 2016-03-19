@@ -1,1 +1,1 @@
-angular.module("nav", ["auth"]);
+angular.module('nav', ['auth']);

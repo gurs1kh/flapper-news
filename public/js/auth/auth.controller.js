@@ -1,4 +1,4 @@
-angular.module("auth").controller('AuthCtrl', ['$scope', '$state', 'AuthService',
+angular.module('auth').controller('AuthCtrl', ['$scope', '$state', 'AuthService',
 	function($scope, $state, auth){
 		$scope.user = {};
 
