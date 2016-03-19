@@ -43,9 +43,6 @@ app.config(['$stateProvider', '$urlRouterProvider',
 					}
 				}]
 			});
-		$urlRouterProvider.otherwise(function($injector, $location){
-			var $state = $injector.get("$state");
-			$state.go('home');
-		});
+		$urlRouterProvider.otherwise("home");
 	}
 ]);
