@@ -10,7 +10,7 @@ module.exports = function(app) {
 		.post(auth, posts.addPost);
 	app.route('/posts/:post')
 		.get(posts.getPostComments)
-		.delete(posts.deletePost);
+		.delete(auth, posts.deletePost);
 	app.route('/posts/:post/upvote')
 		.put(auth, posts.upvotePost);
 	app.param('post', posts.postById);
